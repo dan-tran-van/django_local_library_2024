@@ -12,13 +12,21 @@ def index(request):
     num_books = Book.objects.all().count()
     num_instances = BookInstance.objects.all().count()
     num_genres = Genre.objects.all().count()
-    num_books_by_asato = Book.objects.filter(author__last_name__exact="Asato").filter(author__first_name__exact="Asato").count()
+    num_books_by_asato = (
+        Book.objects.filter(author__last_name__exact="Asato")
+        .filter(author__first_name__exact="Asato")
+        .count()
+    )
 
     # Available books (status = 'a')
     num_instances_available = BookInstance.objects.filter(status__exact="a").count()
 
     # The 'all()' is implied by default.
     num_authors = Author.objects.count()
+
+    # Number of visits to this view, as counted in the session variable.
+    num_visits = request.session.get("num_visits", 0)
+    request.session["num_visits"] = num_visits + 1
 
     context = {
         "num_books": num_books,
@@ -27,6 +35,7 @@ def index(request):
         "num_authors": num_authors,
         "num_genres": num_genres,
         "num_books_by_asato": num_books_by_asato,
+        "num_visits": num_visits,
     }
 
     # Render the HTML template index.html with the data in the context variable
@@ -37,12 +46,15 @@ class BookListView(generic.ListView):
     model = Book
     paginate_by = 2
 
+
 class BookDetailView(generic.DetailView):
     model = Book
+
 
 class AuthorListView(generic.ListView):
     model = Author
     paginate_by = 1
+
 
 class AuthorDetailView(generic.DetailView):
     model = Author

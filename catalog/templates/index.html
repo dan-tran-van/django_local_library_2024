@@ -27,7 +27,8 @@
             <strong>Books by Asato Asato:</strong> {{ num_books_by_asato }}
         </li>
     </ul>
-{% endblock %}
+    <p>You have visited this page {{ num_visits }} time{{ num_visits|pluralize }}.</p>
+{% endblock content %}
 {% block title %}
     <title>Local Library - Home</title>
 {% endblock title %}
