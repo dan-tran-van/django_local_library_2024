@@ -46,7 +46,7 @@ ALLOWED_HOSTS = ['web-production-1cf4.up.railway.app','dantran.pythonanywhere.co
 # ALLOWED_HOSTS = ['.railway.com','.pythonanywhere.com','127.0.0.1']
 
 
-CSRF_TRUSTED_ORIGINS = ['web-production-1cf4.up.railway.app','https://dantran.pythonanywhere.com']
+CSRF_TRUSTED_ORIGINS = ['https://web-production-1cf4.up.railway.app','https://dantran.pythonanywhere.com']
 # During development/for this tutorial you can instead set just the base URL
 # CSRF_TRUSTED_ORIGINS = ['https://*.railway.app','https://*.pythonanywhere.com']
 
